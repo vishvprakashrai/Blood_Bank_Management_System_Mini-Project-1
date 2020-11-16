@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/about/main.css">
+<script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+{% endblock head %}
+
+{% block title %}About{% endblock title %}
+{% block body %}
+<header class="continer-fluid ">
+            <div id="menu-jk" class="header-bottom" style="font-size: 20px;">
+                <div class="container">
+                    <div class="row nav-row">
+                        <div class="col-md-3 logo">
+                            <img src="static/assets/images/logo.png" alt="">
+                        </div>
+                        <div class="col-md-9 nav-col">
+                            <nav class="navbar navbar-expand-lg navbar-light">
+
+                                <button
+                                    class="navbar-toggler"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#navbarNav"
+                                    aria-controls="navbarNav"
+                                    aria-expanded="false"
+                                    aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="/">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                                        </li>
+                                       
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'news' %}">News</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'contact' %}">Contact US</a>
+                                        </li>
+                                        <a class="btn btn-primary btn-lg" href="/login" role="button" style="height: 54px;margin-top: 14px;">Login</a>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+<section>
+            {% comment %} <div class = "image">
+                <!-- image here -->
+                <img src="/static/about/blood-donation_17735-81.jpg" alt="">
+            </div> {% endcomment %}
+
+            <div>
+            <div class = "content my-2">
+                <h2>About Us</h2>
+                <span><!-- line here --></span>
+
+                <p>Blood banking refers to the process of collecting, separating, and storing blood. The first U.S. blood bank was established in 1936. Today, blood banks collect blood and separate it into its various components so they can be used most effectively according to the needs of the patient. Red blood cells carry oxygen, platelets help the blood clot, and plasma has specific proteins that allow proper regulation of coagulation and healing. Although research has yielded drugs that help people's bone marrow produce new blood cells more rapidly, the body's response time can still take weeks, thus donated blood remains an important and more immediate life-saving resource.</p>
+
+                <!-- <ul class = "links">
+                    <li><a href = "#">work</a></li>
+
+                    <div class = "vertical-line"></div>
+
+                    <li><a href = "#">service</a></li>
+
+                    <div class = "vertical-line"></div>
+                    
+                    <li><a href = "#">contact</a></li>
+                </ul> -->
+
+                <ul class = "icons">
+                    <li>
+                        <i class = "fa fa-twitter"></i>
+                    </li>
+                    <li>
+                        <i class = "fa fa-facebook"></i>
+                    </li>
+                    <li>
+                        <i class = "fa fa-github"></i>
+                    </li>
+                    <li>
+                        <i class = "fa fa-pinterest"></i>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <img src="/static/about/blood-donation_17735-81.jpg" alt="" style="width: 551px;margin-left: 336px;">
+            </div>
+            </div>
+        </section>
+{% endblock body %}
