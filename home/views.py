@@ -26,9 +26,9 @@ def registerdonor(request):
             username = form.cleaned_data.get('username')
             group=Group.objects.get(name='donor')
             user.groups.add(group)
-            # donor.objects.create(
-            #     user=user
-            # )
+             donor.objects.create(
+                 user=user
+             )
 
             messages.success(request, 'Account was created for ' + username)
             return redirect('donordetails')
@@ -47,9 +47,9 @@ def registerseeker(request):
             username = form.cleaned_data.get('username')
             group=Group.objects.get(name='seeker')
             user.groups.add(group)
-            # donor.objects.create(
-            #     user=user
-            # )
+             donor.objects.create(
+                 user=user
+             )
 
             messages.success(request, 'Account was created for ' + username)
             return redirect('seekerdetails')
