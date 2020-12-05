@@ -39,7 +39,7 @@ def admin_only(view_func):
 		elif group == 'seeker':
 			return redirect('seekerdashboard')
 
-		if group == 'admin':
+		else:
 			return view_func(request, *args, **kwargs)
 
 	return wrapper_function
