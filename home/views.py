@@ -143,6 +143,10 @@ def donordashboard(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['seeker'])
 def seekerdashboard(request):
+    dons=blooddonor.objects.all()
+    seeks=bloodseeker.objects.all()
+    d=donor.objects.all()
+    s=seeker.objects.all()
     if request.method == 'POST':
         name = request.POST['name'] 
         email = request.POST['email'] 
@@ -186,6 +190,10 @@ def seekerprofile(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['donor'])
 def donorprofile(request):
+    dons=blooddonor.objects.all()
+    seeks=bloodseeker.objects.all()
+    d=donor.objects.all()
+    s=seeker.objects.all()
     detail=donor.objects.get(user=request.user)
     context={'detail':detail}
     return render(request, 'donorprofile.html', context)
@@ -211,6 +219,10 @@ def donordetails(request):
 
 # @allowed_users(allowed_roles=['seeker'])
 def seekerdetails(request):
+    dons=blooddonor.objects.all()
+    seeks=bloodseeker.objects.all()
+    d=donor.objects.all()
+    s=seeker.objects.all()
     if request.method == 'POST':
         dname = request.POST['name'] 
         email = request.POST['email'] 
