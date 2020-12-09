@@ -34,7 +34,7 @@
 				<img src="/static/dashboard/images/profile.svg" class="img-responsive" alt="">
 			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">{{request.user}}</div>
+				<div class="profile-usertitle-name">{{user.username}}</div>
 				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
 			</div>
 			<div class="clear"></div>
@@ -49,6 +49,7 @@
 			<li class="active"><a href="{% url 'donordashboard' %}"><em class="fa fa-dashboard">&nbsp;</em> Home</a></li>
 			
 			<li><a href="{% url 'donorprofile' %}"><em class="fa fa-power-off">&nbsp;</em> Profile</a></li>
+			<li><a href="{% url 'donordetails' %}"><em class="fa fa-power-off">&nbsp;</em> Personal Information</a></li>
 		
 			
 			<li><a href="{% url 'logout' %}"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
