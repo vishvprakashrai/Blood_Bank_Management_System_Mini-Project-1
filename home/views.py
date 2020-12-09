@@ -26,12 +26,12 @@ def registerdonor(request):
             username = form.cleaned_data.get('username')
             group=Group.objects.get(name='donor')
             user.groups.add(group)
-             #donor.objects.create(
-             #    user=user
-             #)
+            # donor.objects.create(
+            #     user=user
+            # )
 
             messages.success(request, 'Account was created for ' + username)
-            return redirect('donordetails')
+            return redirect('login')
     context = {'form':form}
     return render(request, 'registerdonor.html', context)
     # return HttpResponse("this is register")
@@ -47,12 +47,12 @@ def registerseeker(request):
             username = form.cleaned_data.get('username')
             group=Group.objects.get(name='seeker')
             user.groups.add(group)
-             #donor.objects.create(
-             #    user=user
-             #)
+            # donor.objects.create(
+            #     user=user
+            # )
 
             messages.success(request, 'Account was created for ' + username)
-            return redirect('seekerdetails')
+            return redirect('login')
     context = {'form':form}
     return render(request, 'registerseeker.html', context)
     # return HttpResponse("this is register")
@@ -136,6 +136,7 @@ def donordashboard(request):
     total_seekers= seeks.count()
     td= d.count()
     ts= s.count()
+    
     context={'dons':dons, 'seeks':seeks,'td':td, 'ts':ts, 'total_donors':total_donors, 'total_seekers':total_seekers}
     return render(request, 'donordashboard.html', context)
     # return HttpResponse("this is donordashboard") 
@@ -143,10 +144,6 @@ def donordashboard(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['seeker'])
 def seekerdashboard(request):
-    dons=blooddonor.objects.all()
-    seeks=bloodseeker.objects.all()
-    d=donor.objects.all()
-    s=seeker.objects.all()
     if request.method == 'POST':
         name = request.POST['name'] 
         email = request.POST['email'] 
@@ -154,7 +151,7 @@ def seekerdashboard(request):
         blood = request.POST['blood'] 
         desc = request.POST['message'] 
 
-        details=blooddonor(name=name, email=email, phone=phone, blood=blood, desc=desc)
+        details=bloodseeker(name=name, email=email, phone=phone, blood=blood, desc=desc)
 
         details.save()
         # return render(request, 'donordashboard.html')
@@ -182,59 +179,62 @@ def adminaction(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['seeker'])
 def seekerprofile(request):
-    detail=seeker.objects.get(user=request.user)
-    context={'detail':detail}
-    return render(request, 'seekerprofile.html', context)
-    # return HttpResponse("this is adminaction") 
+    try:
+        detail=seeker.objects.get(user=request.user)
+        context={'detail':detail}
+        return render(request, 'seekerprofile.html', context)
+    except:
+        return HttpResponse("You have to first update profile information.")
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['donor'])
 def donorprofile(request):
-    dons=blooddonor.objects.all()
-    seeks=bloodseeker.objects.all()
-    d=donor.objects.all()
-    s=seeker.objects.all()
-    detail=donor.objects.get(user=request.user)
-    context={'detail':detail}
-    return render(request, 'donorprofile.html', context)
-    # return HttpResponse("this is adminaction") 
+    try:
+        detail=donor.objects.get(user=request.user)
+        context={'detail':detail}
+        return render(request, 'donorprofile.html', context)
+    except:
+        return HttpResponse("You have to first update profile information.")
+
 
 # @allowed_users(allowed_roles=['donor'])
 def donordetails(request):
     if request.method == 'POST':
-        dname = request.POST['name'] 
+        dname = request.POST['dname'] 
         email = request.POST['email'] 
         phone = request.POST['phone'] 
         address = request.POST['address'] 
         city = request.POST['city'] 
-        desc = request.POST['message'] 
+        desc = request.POST['message']
+        usser=request.user
+        # donor.objects.create(
+        #     user=usser
+        # )
 
-        details=donor(dname=dname, email=email, phone=phone, address=address, city=city, desc=desc)
+        details=donor(user=usser, dname=dname, email=email, phone=phone, address=address, city=city, desc=desc)
 
         details.save()
-        return render(request, 'donordashboard.html')
+       
+        return redirect('donordashboard')
     return render(request, 'donordetails.html')
     # return HttpResponse("this is donordetails") 
 
 
 # @allowed_users(allowed_roles=['seeker'])
 def seekerdetails(request):
-    dons=blooddonor.objects.all()
-    seeks=bloodseeker.objects.all()
-    d=donor.objects.all()
-    s=seeker.objects.all()
     if request.method == 'POST':
-        dname = request.POST['name'] 
+        dname = request.POST['dname'] 
         email = request.POST['email'] 
         phone = request.POST['phone'] 
         address = request.POST['address'] 
         city = request.POST['city'] 
         desc = request.POST['message']
+        usser=request.user        
 
-        details=seeker(dname=dname, email=email, phone=phone, address=address, city=city, desc=desc)
+        details=seeker(user=usser, dname=dname, email=email, phone=phone, address=address, city=city, desc=desc)
 
         details.save()
-        return render(request, 'login.html')
+        return redirect('seekerdashboard')
 
     return render(request, 'seekerdetails.html')
     # return HttpResponse("this is seekerdetails") 
