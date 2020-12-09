@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class seeker(models.Model):
-    user=models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    # user=models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user=models.CharField(max_length=200, null=True)
     id=models.AutoField(primary_key=True)
     dname = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
@@ -16,7 +17,8 @@ class seeker(models.Model):
         return self.dname
 
 class donor(models.Model):
-    user=models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    # user=models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user=models.CharField(max_length=200, null=True)
     id=models.AutoField(primary_key=True)
     dname = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
